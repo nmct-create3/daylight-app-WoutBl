@@ -8,9 +8,11 @@
 
 :root {
     /* colors */
-
+    --color-front: #0F3557;
+    --color-back: #CCE7FF;
     /* opacity */
-
+    --opacity60: 60%;
+    --opacity100: 100%;
     /* transitions */
 }
 
@@ -27,10 +29,12 @@
 html {
     font-size: 16px;
     line-height: 1.5;
-    font-family: Helvetica, arial, sans-serif;
+    font-family: 'Work Sans', sans-serif;
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: var(--color-back);
+    color: var(--color-front);
 }
 
 *,
@@ -46,14 +50,9 @@ html {
 * Customize the background color to match your design.
 */
 
-::-moz-selection {
-    background: red;
-    color: white;
-    text-shadow: none;
-}
 
 ::selection {
-    background: red;
+    background: var(--color-front);
     color: white;
     text-shadow: none;
 }
@@ -249,7 +248,12 @@ input::placeholder {
 */
 
 .c-logo {
-
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    opacity: var(--opacity60);
+    margin-bottom: auto;
 }
 
 /*
@@ -259,7 +263,10 @@ input::placeholder {
 */
 
 .c-sun {
-
+    height: 22px;
+    width: 22px;
+    fill: var(--color-front);
+    
 }
 
 .c-logo .c-sun {
@@ -272,11 +279,91 @@ input::placeholder {
     Main app wrapper
 */
 
+.c-app{
+    min-height: 100vh;
+    padding: 2rem 2rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    max-width: 25rem;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+.c-app__summary {
+    font-size: 1.75rem;
+    line-height: 2.5rem;
+}
+
+.c-app__summarytime {
+    opacity: var(--opacity100) ;
+}
+
+.c-app__summarytext{
+    opacity: var(--opacity60);
+}
+
+.c-app__location {
+    font-size: 16px;
+    opacity: var(--opacity60);
+}
+
+
 /*
     Component: Horizon
     ---
     Horizon with sun visualisation
 */
+
+.c-horizon{
+    margin-bottom: 2.125rem;
+}
+
+.c-horizon__sky-wrapper {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+    padding-right: 2.5rem;
+    padding-top: 1.375rem;
+}
+
+.c-horizon__sky {
+    position: relative;
+    height: 100%;
+}
+
+.c-horizon__sun {
+    position: absolute;
+    display: block;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    transform: translateY(52%)
+}
+
+.c-horizon__sun::before {
+    content: attr(data-time);
+    font-size: 12px;
+    line-height: 14px;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    display: block;
+}
+
+.c-horizon__line{
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid var(--color-front);
+    padding-top: 0.5rem;
+}
+
+.c-horizon__time {
+    font-size: 0.75rem;
+    line-height:0.875rem;
+}
 
 /*------------------------------------*\
 #UTILITIES
@@ -294,6 +381,12 @@ input::placeholder {
 /*
     Change the theme using CSS vars.
 */
+
+.is-night{
+    --color-front: #CCE7FF;
+    --color-back: #0F3557;
+}
+
 
 /* Night version: just switch the light and dark vars */
 
