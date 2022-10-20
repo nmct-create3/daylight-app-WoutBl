@@ -17,7 +17,7 @@ const placeSun = (sunrise) => {
 	const minutesleft = now.getHours() * 60 + now.getMinutes() - (sunriseDate.getHours() * 60 + sunriseDate.getMinutes())
 
 	console.log(minutesleft)
-
+	updateTimeLeft(minutesleft)
 	const percentage = ((totaltime.getHours() * 60 + totaltime.getMinutes()) / 100) * minutesleft
 	
 
@@ -58,10 +58,24 @@ const setDOMElement = () => {
 };
 
 const makeReadableTimeFormatFromTimeStamp = (timestamp) => {
-	return new Date(timestamp * 1000).toLocaleTimeString([], {
-		hour: '2-digit',
-		minute: '2-digit'
-	});
+
+	const date = new Date(timestamp*1000)
+	let dateValues = [
+		date.getFullYear(),
+		date.getMonth() + 1,
+		date.getDate(),
+		date.getHours(),
+		date.getMinutes(),
+		date.getSeconds(),
+	];
+
+	
+	if (dateValues[4] == 0 || dateValues[4] == 1 || dateValues[4] == 2 || dateValues[4] == 3 || dateValues[4] == 4 || dateValues[4] == 5 || dateValues[4] == 6 || dateValues[4] == 7 || dateValues[4] == 8 || dateValues[4] == 9) {
+		const minutes = `0${dateValues[4]}`
+		return `${dateValues[3]}:${minutes}`
+	}
+
+	return `${dateValues[3]}:${dateValues[4]}`
 };
 
 
@@ -91,8 +105,6 @@ document.addEventListener('DOMContentLoaded', async function () {
 	console.log(city);
 	setLocation(city);
 
-	totaltime = new Date(city.sunset - city.sunrise)
-	
-	updateTimeLeft(makeReadableTimeFormatFromTimeStamp ());
+	totaltime = new Date(city.sunset - city.sunrise);
 	placeSun(city.sunrise)
 });
